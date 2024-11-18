@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ obituary.name }} - Obituary</title>
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+    <!-- SEO meta tags -->
+    <meta name="description" content="{{ meta_description }}">
+    <meta name="keywords" content="{{ meta_keywords }}">
+
+    <!-- Open Graph meta tags for social media -->
+    <meta property="og:title" content="{{ meta_title }}">
+    <meta property="og:description" content="{{ meta_description }}">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="URL_to_image_if_available">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ meta_title }}">
+    <meta name="twitter:description" content="{{ meta_description }}">
+
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <h1>{{ obituary.name }}</h1>
+
+    <p><strong>Date of Birth:</strong> {{ obituary.date_of_birth }}</p>
+    <p><strong>Date of Death:</strong> {{ obituary.date_of_death }}</p>
+    <p><strong>Author:</strong> {{ obituary.author }}</p>
+    <p><strong>Content:</strong> {{ obituary.content }}</p>
+
+    <a href="{% url 'view_obituaries' %}">Back to Obituaries List</a>
+
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="{{ obituary.name }} - Obituary">
+    <meta property="og:description" content="{{ obituary.content|truncatewords:20 }}">
+    <meta property="og:image" content="URL_TO_OBITUARY_IMAGE">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:type" content="article">
+</body>
+</html>

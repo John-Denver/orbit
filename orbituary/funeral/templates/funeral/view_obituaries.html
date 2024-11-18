@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obituaries</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Obituaries</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date of Birth</th>
+                <th>Date of Death</th>
+                <th>Author</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obituary in obituaries %}
+            <tr>
+                <td>{{ obituary.name }}</td>
+                <td>{{ obituary.date_of_birth }}</td>
+                <td>{{ obituary.date_of_death }}</td>
+                <td>{{ obituary.author }}</td>
+                <td><a href="{% url 'view_obituary_detail' obituary.slug %}">View</a></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No obituaries available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<br>
+  
+
+    <!-- Social Media Sharing -->
+<div class="social-share">
+    <a href="{% url 'submit_obituary' %}">Add an Orbituary</a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank">Share on Facebook</a>
+    <a href="https://twitter.com/intent/tweet?text={{ meta_title }}&url={{ request.build_absolute_uri }}" target="_blank">Share on Twitter</a>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ meta_title }}" target="_blank">Share on LinkedIn</a>
+</div>
+
+    
+</body>
+</html>
